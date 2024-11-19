@@ -1,14 +1,10 @@
-def get_menu_title():
-    """
-    Returns the menu title for the shopping list manager.
-    """
-    return "Shopping List Manager"
+MENU_TITLE = "Shopping List Manager"
 
 def display_menu():
     """
     Display the shopping list menu options.
     """
-    print(f"\n{get_menu_title()}")
+    print(f"\n{MENU_TITLE}")
     print("1. Add Item")
     print("2. Remove Item")
     print("3. View List")
