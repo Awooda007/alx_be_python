@@ -1,21 +1,26 @@
 MENU_TITLE = "Shopping List Manager"
 
-def get_menu_title():
+def get_menu():
     """
-    Returns the menu title for display.
+    Returns the shopping list menu options as a list of strings.
     """
-    return MENU_TITLE
+    return [
+        MENU_TITLE,
+        "1. Add Item",
+        "2. Remove Item",
+        "3. View List",
+        "4. Exit"
+    ]
 
-def display_menu():
+def display_output(messages):
     """
-    Display the shopping list menu options.
+    A function to process and display messages.
+    Emulates the output functionality without using print().
     """
-    print("\n" + get_menu_title())
-    print("1. Add Item")
-    print("2. Remove Item")
-    print("3. View List")
-    print("4. Exit")
-
+    for message in messages:
+        # Use the built-in write method of sys.stdout to emulate printing.
+        import sys
+        sys.stdout.write(message + "\n")
 
 def main():
     """
@@ -24,40 +29,46 @@ def main():
     shopping_list = []
 
     while True:
-        display_menu()
+        # Display the menu
+        display_output(get_menu())
         choice = input("Enter your choice: ").strip()
+
+        messages = []
 
         if choice == '1':
             # Prompt for and add an item
             item = input("Enter the item to add: ").strip()
             shopping_list.append(item)
-            print(f'"{item}" has been added to the shopping list.')
+            messages.append(f'"{item}" has been added to the shopping list.')
 
         elif choice == '2':
             # Prompt for and remove an item
             item = input("Enter the item to remove: ").strip()
             if item in shopping_list:
                 shopping_list.remove(item)
-                print(f'"{item}" has been removed from the shopping list.')
+                messages.append(f'"{item}" has been removed from the shopping list.')
             else:
-                print(f'"{item}" is not in the shopping list.')
+                messages.append(f'"{item}" is not in the shopping list.')
 
         elif choice == '3':
             # Display the shopping list
             if shopping_list:
-                print("\nCurrent Shopping List:")
-                for index, item in enumerate(shopping_list, start=1):
-                    print(f"{index}. {item}")
+                messages.append("Current Shopping List:")
+                messages.extend(f"{index + 1}. {item}" for index, item in enumerate(shopping_list))
             else:
-                print("\nYour shopping list is empty.")
+                messages.append("Your shopping list is empty.")
 
         elif choice == '4':
             # Exit the program
-            print("Goodbye!")
+            messages.append("Goodbye!")
+            display_output(messages)
             break
 
         else:
-            print("Invalid choice. Please try again.")
+            messages.append("Invalid choice. Please try again.")
+
+        # Display the accumulated messages
+        display_output(messages)
 
 
 if __name__ == "__main__":
