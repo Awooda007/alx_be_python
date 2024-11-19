@@ -1,26 +1,24 @@
-MENU_TITLE = "Shopping List Manager"
+MENU_OPTIONS = [
+    "Shopping List Manager",
+    "1. Add Item",
+    "2. Remove Item",
+    "3. View List",
+    "4. Exit"
+]
 
-def get_menu():
+def generate_menu():
     """
-    Returns the shopping list menu options as a list of strings.
+    Generate the menu as a single string to display.
     """
-    return [
-        MENU_TITLE,
-        "1. Add Item",
-        "2. Remove Item",
-        "3. View List",
-        "4. Exit"
-    ]
+    return "\n".join(MENU_OPTIONS)
 
 def display_output(messages):
     """
-    A function to process and display messages.
+    A function to display messages.
     Emulates the output functionality without using print().
     """
-    for message in messages:
-        # Use the built-in write method of sys.stdout to emulate printing.
-        import sys
-        sys.stdout.write(message + "\n")
+    import sys
+    sys.stdout.write("\n".join(messages) + "\n")
 
 def main():
     """
@@ -30,7 +28,7 @@ def main():
 
     while True:
         # Display the menu
-        display_output(get_menu())
+        display_output([generate_menu()])
         choice = input("Enter your choice: ").strip()
 
         messages = []
